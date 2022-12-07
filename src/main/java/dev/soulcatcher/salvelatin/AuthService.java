@@ -16,6 +16,7 @@ public class AuthService {
     }
 
 
+
     private String generatePassword(String input) {
         return BCrypt.hashpw(input, BCrypt.gensalt(14));
     }
