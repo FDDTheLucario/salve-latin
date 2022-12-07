@@ -1,5 +1,6 @@
-package dev.soulcatcher.salvelatin;
+package dev.soulcatcher.salvelatin.services;
 
+import dev.soulcatcher.salvelatin.dtos.ErrorResponse;
 import dev.soulcatcher.salvelatin.dtos.RegisterRequest;
 import dev.soulcatcher.salvelatin.exceptions.UserConflictException;
 import dev.soulcatcher.salvelatin.models.AuthResponse;
@@ -14,7 +15,6 @@ public class AuthService {
     public AuthService(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
-
 
 
     private String generatePassword(String input) {
