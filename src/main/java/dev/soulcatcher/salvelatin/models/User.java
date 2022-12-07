@@ -1,5 +1,6 @@
 package dev.soulcatcher.salvelatin.models;
 
+import dev.soulcatcher.salvelatin.dtos.RegisterRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -31,6 +32,10 @@ public class User {
         this.email = email;
         this.username = username;
         this.password = password;
+    }
+
+    public User(RegisterRequest registerRequest) {
+        this(registerRequest.getEmail(), registerRequest.getUsername(), registerRequest.getPassword());
     }
 
     public User(UUID userId, String email, String username, String password, boolean expired) {
