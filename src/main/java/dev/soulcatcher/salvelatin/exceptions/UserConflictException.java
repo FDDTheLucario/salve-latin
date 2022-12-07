@@ -1,6 +1,6 @@
 package dev.soulcatcher.salvelatin.exceptions;
 
-public class UserConflictException extends Exception {
+public class UserConflictException extends RuntimeException {
     public UserConflictException() {
         super();
     }

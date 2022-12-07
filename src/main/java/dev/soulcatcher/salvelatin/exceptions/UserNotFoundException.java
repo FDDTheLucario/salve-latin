@@ -1,6 +1,6 @@
 package dev.soulcatcher.salvelatin.exceptions;
 
-public class UserNotFoundException extends Exception {
+public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException() {
         super();
     }
