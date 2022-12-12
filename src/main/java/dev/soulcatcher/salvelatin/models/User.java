@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -22,7 +23,9 @@ public class User {
     @Column(unique = true, nullable = false)
     private String password;
     @Column(nullable = false)
-    private boolean expired = false;
+    private long registeredAt = Instant.now().getEpochSecond();
+    @Column(nullable = false)
+    private boolean verified = false;
 
     public User() {
         super();
@@ -38,12 +41,13 @@ public class User {
         this(registerRequest.getEmail(), registerRequest.getUsername(), registerRequest.getPassword());
     }
 
-    public User(UUID userId, String email, String username, String password, boolean expired) {
+    public User(UUID userId, String email, String username, String password, long registeredAt, boolean verified) {
         this.userId = userId;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.expired = expired;
+        this.registeredAt = registeredAt;
+        this.verified = verified;
     }
 
     public UUID getUserId() {
@@ -70,6 +74,18 @@ public class User {
         this.username = username;
     }
 
+    public long getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -83,12 +99,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userId, user.userId) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
+        return registeredAt == user.registeredAt && verified == user.verified && userId.equals(user.userId) && email.equals(user.email) && username.equals(user.username) && password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, email, username, password);
+        return Objects.hash(userId, email, username, password, registeredAt, verified);
     }
 
     @Override
@@ -98,6 +114,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", registeredAt=" + registeredAt +
+                ", verified=" + verified +
                 '}';
     }
 }
