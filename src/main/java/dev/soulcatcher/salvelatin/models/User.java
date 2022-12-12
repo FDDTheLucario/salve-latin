@@ -22,6 +22,7 @@ public class User {
     private String username;
     @Column(unique = true, nullable = false)
     private String password;
+    @Column(nullable = false)
     private long registeredAt = Instant.now().getEpochSecond();
     @Column(nullable = false)
     private boolean verified = false;
