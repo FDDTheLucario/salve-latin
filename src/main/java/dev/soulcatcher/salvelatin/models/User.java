@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,7 +25,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String password;
     @Column(nullable = false)
-    private long registeredAt = Instant.now().getEpochSecond();
+    private long registeredAt = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
     @Column(nullable = false)
     private boolean verified = false;
 
