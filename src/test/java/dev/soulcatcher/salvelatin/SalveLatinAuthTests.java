@@ -23,14 +23,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class SalveLatinAuthTests {
-    @Autowired
-    private AuthService authService;
-    @Autowired
-    private UserRepository userRepo;
+public class SalveLatinAuthTests {
+
+    private final AuthService authService;
+    private final UserRepository userRepo;
     private User testUser;
     private RegisterRequest request;
     private final Logger logger = LogManager.getLogger();
+
+    @Autowired
+    public SalveLatinAuthTests(UserRepository userRepo) {
+        this.userRepo = userRepo;
+        this.authService = new AuthService(userRepo);
+    }
 
     @BeforeEach
     public void setUp() {
