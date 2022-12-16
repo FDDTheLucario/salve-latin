@@ -35,8 +35,10 @@ public class LoggingAspect {
     public void logMethodException(JoinPoint jp, Throwable t) {
         var methodSignature = extractMethodSignature(jp);
         var exceptionName = t.getClass().getSimpleName();
-        logger.warn("{} was thrown in method {} with the message \"{}\"", exceptionName, methodSignature, t.getMessage());
+        logger.warn("{} was thrown in method {} with the message \"{}\"", exceptionName, methodSignature,
+                t.getMessage());
     }
+
     private String extractMethodSignature(JoinPoint jp) {
         return jp.getTarget().getClass().getSimpleName() + "#" + jp.getSignature().getName();
     }

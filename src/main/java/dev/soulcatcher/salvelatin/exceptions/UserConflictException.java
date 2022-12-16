@@ -17,7 +17,8 @@ public class UserConflictException extends RuntimeException {
         super(cause);
     }
 
-    public UserConflictException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public UserConflictException(String message, Throwable cause, boolean enableSuppression,
+            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

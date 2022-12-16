@@ -98,10 +98,13 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         User user = (User) o;
-        return registeredAt == user.registeredAt && verified == user.verified && userId.equals(user.userId) && email.equals(user.email) && username.equals(user.username) && password.equals(user.password);
+        return registeredAt == user.registeredAt && verified == user.verified && userId.equals(user.userId)
+                && email.equals(user.email) && username.equals(user.username) && password.equals(user.password);
     }
 
     @Override
@@ -111,14 +114,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", registeredAt=" + registeredAt +
-                ", verified=" + verified +
-                '}';
+        return "User{" + "userId=" + userId + ", email='" + email + '\'' + ", username='" + username + '\''
+                + ", password='" + password + '\'' + ", registeredAt=" + registeredAt + ", verified=" + verified + '}';
     }
 }
-

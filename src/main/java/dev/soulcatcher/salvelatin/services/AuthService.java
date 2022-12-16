@@ -16,6 +16,7 @@ public class AuthService {
     private static final String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
     // Must be at least 8 characters with one uppercase letter, one lower, one number, and one special character.
     private static final String EMAIL_REGEX = "^(?=.{1,64}@)[\\p{L}0-9_-]+(\\.[\\p{L}0-9_-]+)*@[^-][\\p{L}0-9-]+(\\.[\\p{L}0-9-]+)*(\\.\\p{L}{2,})$";
+
     // Email Regex that supports Unicode.
     public AuthService(UserRepository userRepo) {
         this.userRepo = userRepo;

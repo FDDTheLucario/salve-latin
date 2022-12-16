@@ -12,7 +12,6 @@ import java.util.UUID;
 @SpringBootApplication
 public class SalveLatinApplication {
 
-
     public static void main(String[] args) {
 
         SpringApplication.run(SalveLatinApplication.class, args);

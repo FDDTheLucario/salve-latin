@@ -11,18 +11,12 @@ public class DeclensionConverter implements AttributeConverter<Declension, Integ
 
     @Override
     public Integer convertToDatabaseColumn(Declension declension) {
-        return (declension == null) ?
-                null :
-                declension.getCode();
+        return (declension == null) ? null : declension.getCode();
     }
 
     @Override
     public Declension convertToEntityAttribute(Integer code) {
-        return (code == null) ?
-                null :
-                Stream.of(Declension.values())
-                        .filter(c -> c.getCode() == code)
-                        .findFirst()
-                        .orElseThrow(IllegalArgumentException::new);
+        return (code == null) ? null : Stream.of(Declension.values()).filter(c -> c.getCode() == code).findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

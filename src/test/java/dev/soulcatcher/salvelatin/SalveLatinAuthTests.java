@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,34 +33,39 @@ class SalveLatinAuthTests {
     private final Logger logger = LogManager.getLogger();
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         testUser = new User("usertesting@test.com", "testuser", "testp@ssword1!");
         if (!userRepo.existsById(testUser.getUserId())) {
             logger.info("Test user not added - adding to the test db.");
             userRepo.save(testUser);
         }
     }
+    @AfterEach
+    public void after() {
+        userRepo.delete(testUser);
+    }
+
     @Test
     @Transactional
     void whenRegisteringWithInvalidEmail_ExpectInvalidException() {
         request = new RegisterRequest("example", "testing", "test");
         assertThrows(InvalidEmailException.class, () -> authService.register(request));
     }
+
     @Test
-    @Transactional
     void whenRegisteringWithInsecurePassword_ExpectException() {
         request = new RegisterRequest("test@test.com", "test-account", "1234");
         assertThrows(InvalidPasswordException.class, () -> authService.register(request));
     }
+
     @Test
-    @Transactional
     void whenGivenUser_FindUserByItsId() {
         var user = userRepo.findById(testUser.getUserId()).get();
 
         assertEquals(user.getUserId(), testUser.getUserId());
     }
+
     @Test
-    @Transactional
     void givenValidRegisterRequest_PersistUserToDb() {
         request = new RegisterRequest("register-test@test.com", "test-user", "Passw0rd!");
 
