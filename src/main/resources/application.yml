@@ -8,3 +8,4 @@ spring:
     name: salvelatin
   profiles:
     default: local
+    active: local
