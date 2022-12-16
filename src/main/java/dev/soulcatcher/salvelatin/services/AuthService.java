@@ -2,7 +2,7 @@ package dev.soulcatcher.salvelatin.services;
 
 import dev.soulcatcher.salvelatin.dtos.RegisterRequest;
 import dev.soulcatcher.salvelatin.exceptions.*;
-import dev.soulcatcher.salvelatin.models.AuthResponse;
+import dev.soulcatcher.salvelatin.dtos.AuthResponse;
 import dev.soulcatcher.salvelatin.models.User;
 import dev.soulcatcher.salvelatin.repos.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;

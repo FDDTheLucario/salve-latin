@@ -77,4 +77,10 @@ public class SalveLatinAuthTests {
         var response = authService.register(request);
         assertEquals(response.getUserId(), userRepo.findById(response.getUserId()).get().getUserId());
     }
+    @Test
+    void givenValidRegisterRequest_ExpectVerificationToBeFalse() {
+        request = new RegisterRequest("tester@gmail.com", "tester1", "p@ssw0rd!");
+
+
+    }
 }

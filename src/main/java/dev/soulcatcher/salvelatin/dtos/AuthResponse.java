@@ -1,5 +1,6 @@
-package dev.soulcatcher.salvelatin.models;
+package dev.soulcatcher.salvelatin.dtos;
 
+import dev.soulcatcher.salvelatin.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
