@@ -6,10 +6,12 @@ import dev.soulcatcher.salvelatin.exceptions.InvalidPasswordException;
 import dev.soulcatcher.salvelatin.models.User;
 import dev.soulcatcher.salvelatin.repos.UserRepository;
 import dev.soulcatcher.salvelatin.services.AuthService;
+import dev.soulcatcher.salvelatin.services.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,15 +28,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class SalveLatinAuthTests {
 
     private final AuthService authService;
+    private final UserService userService;
     private final UserRepository userRepo;
     private User testUser;
     private RegisterRequest request;
     private final Logger logger = LogManager.getLogger();
 
     @Autowired
-    public SalveLatinAuthTests(UserRepository userRepo) {
+    public SalveLatinAuthTests(UserRepository userRepo, AuthService authService, UserService userService) {
         this.userRepo = userRepo;
-        this.authService = new AuthService(userRepo);
+        this.authService = authService;
+        this.userService = userService;
     }
 
     @BeforeEach
@@ -80,7 +84,9 @@ public class SalveLatinAuthTests {
     @Test
     void givenValidRegisterRequest_ExpectVerificationToBeFalse() {
         request = new RegisterRequest("tester@gmail.com", "tester1", "p@ssw0rd!");
+        var response = authService.register(request);
 
-
+        var unverifiedUser = userService.findById(response.getUserId());
+        Assertions.assertThat(unverifiedUser.isVerified()).isFalse();
     }
 }

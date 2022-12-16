@@ -15,8 +15,9 @@ import java.util.UUID;
 public class AuthResponse {
     private UUID userId;
     private long sessionStartedAt = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-
+    private boolean verified;
     public AuthResponse(User user) {
         this.userId = user.getUserId();
+        this.verified = user.isVerified();
     }
 }
